@@ -1,0 +1,174 @@
+package RayTracer;
+
+import org.junit.jupiter.api.*;
+
+import static RayTracer.Tuple.point;
+import static RayTracer.Tuple.vector;
+import static org.junit.jupiter.api.Assertions.*;
+
+public class Tester {
+    @Test
+    @DisplayName("1. A Tuple is a point (4)")
+    void testTuplePoint() throws NoSuchFieldException, IllegalAccessException {
+        Tuple tuple = new Tuple(4.3, -4.2, 3.1 ,1.0);
+        double x = tuple.getX();
+        double y = tuple.getY();
+        double z = tuple.getZ();
+        boolean isVector = tuple.isVector();
+        boolean isPoint = tuple.isPoint();
+
+        assertEquals(4.3, x);
+        assertEquals(-4.2, y);
+        assertEquals(3.1, z);
+        assertFalse(isVector);
+        assertTrue(isPoint);
+    }
+
+    @Test
+    @DisplayName("2. A Tuple is a vector (4)")
+    void testTupleVector() {
+        Tuple tuple = new Tuple(4.3, -4.2, 3.1 ,0.0);
+        double x = tuple.getX();
+        double y = tuple.getY();
+        double z = tuple.getZ();
+        boolean isVector = tuple.isVector();
+        boolean isPoint = tuple.isPoint();
+
+        assertEquals(4.3, x);
+        assertEquals(-4.2, y);
+        assertEquals(3.1, z);
+        assertFalse(isPoint);
+        assertTrue(isVector);
+    }
+
+    @Test
+    @DisplayName("3. point() creates a point (4)")
+    void testPointMaker() throws NoSuchFieldException, IllegalAccessException {
+        Tuple tuple = point(4.3, -4.2, 3.1);
+        double x = tuple.getX();
+        double y = tuple.getY();
+        double z = tuple.getZ();
+        boolean isVector = tuple.isVector();
+        boolean isPoint = tuple.isPoint();
+
+        assertEquals(4.3, x);
+        assertEquals(-4.2, y);
+        assertEquals(3.1, z);
+        assertFalse(isVector);
+        assertTrue(isPoint);
+    }
+
+    @Test
+    @DisplayName("4. vector() creates a vector (4)")
+    void testVectorMaker() {
+        Tuple tuple = vector(4.3, -4.2, 3.1 );
+        double x = tuple.getX();
+        double y = tuple.getY();
+        double z = tuple.getZ();
+        boolean isVector = tuple.isVector();
+        boolean isPoint = tuple.isPoint();
+
+        assertEquals(4.3, x);
+        assertEquals(-4.2, y);
+        assertEquals(3.1, z);
+        assertFalse(isPoint);
+        assertTrue(isVector);
+    }
+
+    @Test
+    @DisplayName("5. add() Adding a point and a vector (6)")
+    void testAdditionPV() {
+        Tuple a1 = point(3, -2, 5);
+        Tuple a2 = vector(2, 3, 1);
+        Tuple result = a1.add(a2);
+        assertTrue(result.equals(point(5, 1, 6)));
+
+        Tuple resultReversed = a2.add(a1);
+        assertTrue(resultReversed.equals(point(5, 1, 6)));
+    }
+
+    @Test
+    @DisplayName("6. add() Adding two vectors (6)")
+    void testAdditionVV() {
+        Tuple a1 = vector(3, -2, 5);
+        Tuple a2 = vector(2, 3, 1);
+        Tuple result = a1.add(a2);
+        assertTrue(result.equals(vector(5, 1, 6)));
+    }
+
+    @Test
+    @DisplayName("7. add() Adding two points throws an IllegalArgumentException (6)")
+    void testAdditionPP() {
+        Tuple a1 = point(3, -2, 5);
+        Tuple a2 = point(2, 3, 1);
+        assertThrows(IllegalArgumentException.class,
+                () -> {a1.add(a2);});
+    }
+
+
+    @Test
+    @DisplayName("8. subtract() Subtracting two points (6)")
+    void testSubtractPP(){
+        Tuple a1 = point(3, 2, 1);
+        Tuple a2 = point(5, 6, 7);
+        assertTrue(a1.subtract(a2).equals(vector(-2,-4,-6)));
+    }
+
+    @Test
+    @DisplayName("9. subtract() Subtracting a vector from a point (6)")
+    void testSubtractPV(){
+        Tuple a1 = point(3, 2, 1);
+        Tuple a2 = vector(5, 6, 7);
+        assertTrue(a1.subtract(a2).equals(point(-2,-4,-6)));
+    }
+
+    @Test
+    @DisplayName("10. subtract() Subtracting two vectors (6)")
+    void testSubtractVV(){
+        Tuple a1 = vector(3, 2, 1);
+        Tuple a2 = vector(5, 6, 7);
+        assertTrue(a1.subtract(a2).equals(vector(-2,-4,-6)));
+    }
+
+    @Test
+    @DisplayName("11. subtract() Subtracting a point from a vector (7)")
+    void testSubtractVP(){
+        Tuple a1 = vector(3, 2, 1);
+        Tuple a2 = point(5, 6, 7);
+        assertThrows(IllegalArgumentException.class,
+                () -> {a1.subtract(a2);});
+    }
+
+    @Test
+    @DisplayName("12. subtract() Subtracting a vector from the 0 vector (7)")
+    void testNegationBySubtraction(){
+        Tuple zero = vector(0, 0, 0);
+        Tuple a2 = vector(1, -2, 3);
+        assertTrue(zero.subtract(a2).equals(vector(-1,2,-3)));
+    }
+
+    @Test
+    @DisplayName("13. negate() Test for negation (7)")
+    void testNegate(){
+        Tuple a = vector(1,-2,3);
+        a.negate();
+        assertTrue(a.equals(vector(-1,2,-3)));
+    }
+
+    @Test
+    @DisplayName("14. multiplication() Multiplying a tuple by a scalar (8)")
+    void testScalarMult(){
+        Tuple a = vector(1,-2,3);
+        a.multiply(3.5);
+        assertTrue(a.equals(vector(3.5,-7,10.5)));
+    }
+
+    @Test
+    @DisplayName("15. multiplication() Multiplying a tuple by a faction (8)")
+    void testFractMult(){
+        Tuple a = vector(1,-2,3);
+        a.multiply(0.5);
+        assertTrue(a.equals(vector(0.5,-1,1.5)));
+    }
+
+}
