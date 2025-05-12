@@ -1,5 +1,5 @@
 package RayTracer;
-
+import java.math.*;
 import org.junit.jupiter.api.*;
 
 import static RayTracer.Tuple.point;
@@ -171,4 +171,53 @@ public class Tester {
         assertTrue(a.equals(vector(0.5,-1,1.5)));
     }
 
+    @Test
+    @DisplayName("16. magnitude() Computing the magnitude of different vectors (8-9)")
+    void testMagnitdude(){
+        double a = vector(1,0,0).magnitude();
+        double b = vector(0,1,0).magnitude();
+        double c = vector(0,0,1).magnitude();
+        double d = vector(1,2,3).magnitude();
+        double e = vector(-1,-2,-3).magnitude();
+        assertEquals(1,a);
+        assertEquals(1,b);
+        assertEquals(1,c);
+        assertEquals(Math.sqrt(14), d);
+        assertEquals(Math.sqrt(14), e);
+    }
+
+    @Test
+    @DisplayName("17. normalize() Normalizing Simple Vectors (10)")
+    void testNormalEasy(){
+        Tuple v = vector(4,0,0);
+        v.normalize();
+        assertTrue(vector(1,0,0).equals(v));
+        assertEquals(1, v.magnitude() );
+    }
+
+    @Test
+    @DisplayName("18. normalize() Normalizing more complicated Vectors (10)")
+    void testNormalHard(){
+        Tuple v = vector(1,2,3);
+        v.normalize();
+        assertTrue(v.equals(vector(0.26736, 0.53452, 0.80178)));
+        assertEquals(1, v.magnitude() );
+    }
+
+    @Test
+    @DisplayName("19. dot() Dot product of two vectors (10)")
+    void testDot(){
+        Tuple a = vector(1,2,3);
+        Tuple b = vector(2,3,4);
+        assertEquals(20, a.dot(b));
+    }
+
+    @Test
+    @DisplayName("20. cross() Cross Product of two vectors (11) ")
+    void testCross(){
+        Tuple a = vector(1,2,3);
+        Tuple b = vector(2,3,4);
+        assertTrue(a.cross(b).equals(vector(-1,2,-1)));
+        assertTrue(b.cross(a).equals(vector(1,-2,1)));
+    }
 }

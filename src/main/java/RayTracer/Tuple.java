@@ -6,7 +6,7 @@ public class Tuple {
     private double y;
     private double z;
     private double w;
-    private static double EPSILON = 0.0001;
+    private final static double EPSILON = 0.0001;
 
     //Constructor: Intializes a new tuple with coordinates. Checks that w is 0 or 1.
     public Tuple(double x, double y, double z, double w){
@@ -48,31 +48,7 @@ public class Tuple {
             return true;
         }
 
-        if (this.isPoint() && m.isPoint()){
-            return true;
-        }
-
-        return false;
-    }
-
-    public boolean equals(Tuple m){
-        boolean xSame = equals(this.x, m.x);
-        boolean ySame = equals(this.y, m.y);
-        boolean zSame = equals(this.z, m.z);
-
-        if (this.isPoint() && m.isPoint()){
-            return (xSame && ySame && zSame);
-        }
-
-        if (this.isVector() && m.isVector()){
-            return (xSame && ySame && zSame);
-        }
-
-        return false;
-    }
-
-    public boolean equals(double a, double b) {
-        return (Math.abs(a - b) < EPSILON);
+        return this.isPoint() && m.isPoint();
     }
 
 
@@ -130,5 +106,73 @@ public class Tuple {
         this.y = this.y*d;
         this.z = this.z*d;
     }
+
+    public double magnitude(){
+        double xSq = Math.pow(this.getX(), 2);
+        double ySq = Math.pow(this.getY(), 2);
+        double zSq = Math.pow(this.getZ(), 2);
+        return Math.sqrt((xSq+ ySq + zSq));
+    }
+
+    public void normalize(){
+        double magnitude = this.magnitude();
+        double newX = this.getX() / magnitude;
+        double newY = this.getY() / magnitude;
+        double newZ = this.getZ() / magnitude;
+        this.x = newX;
+        this.y = newY;
+        this.z = newZ;
+    }
+
+    public double dot(Tuple t){
+        if (! this.isVector() || ! t.isVector()){
+            throw new IllegalArgumentException("Dot product can only be computed with vectors.");
+        }
+
+        return (this.getX()*t.getX() + this.getY() * t.getY() + this.getZ() * t.getZ());
+    }
+
+    public Tuple cross(Tuple t){
+        if (! this.isVector() || ! t.isVector()){
+            throw new IllegalArgumentException("Cross product can only be computed with vectors.");
+        }
+        double newX = (this.y*t.z) - (this.z * t.y);
+        double newY = (this.z*t.x) - (this.x*t.z);
+        double newZ = (this.x*t.y) - (this.y*t.x);
+
+        return vector(newX, newY, newZ);
+    }
+
+
+
+    //Overridden Methods
+    @Override
+    public boolean equals(Object a){
+        if (a instanceof Tuple m) {
+            boolean xSame = equals(this.x, m.x);
+            boolean ySame = equals(this.y, m.y);
+            boolean zSame = equals(this.z, m.z);
+
+            if (this.isPoint() && m.isPoint()) {
+                return (xSame && ySame && zSame);
+            }
+
+            if (this.isVector() && m.isVector()) {
+                return (xSame && ySame && zSame);
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public String toString(){
+        return ("(" + this.getX() + ", " + this.getY() + ", " + this.getZ() + ", " + this.w + ")");
+    }
+
+
+    public boolean equals(double a, double b) {
+        return (Math.abs(a - b) < EPSILON);
+    }
+
 
 }
