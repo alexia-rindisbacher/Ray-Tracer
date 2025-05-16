@@ -220,4 +220,48 @@ public class Tester {
         assertTrue(a.cross(b).equals(vector(-1,2,-1)));
         assertTrue(b.cross(a).equals(vector(1,-2,1)));
     }
+
+    @Test
+    @DisplayName("21. Color constructor (16)")
+    void testColor(){
+        Color c = new Color(-0.5, 0.4, 1.7);
+        assertEquals(-0.5, c.getRed());
+        assertEquals(0.4, c.getGreen());
+        assertEquals(1.7, c.getBlue());
+    }
+
+    @Test
+    @DisplayName("22. Adding Colors (17)")
+    void testAddColor(){
+        Color c1 = new Color(0.9,0.6, 0.75);
+        Color c2 = new Color(0.7,0.1, 0.25);
+        assertTrue(new Color(1.6,0.7, 1.0).equals(c1.add(c2)));
+    }
+
+
+    @Test
+    @DisplayName("23. Subtracting Colors (17)")
+    void testSubtractColor(){
+        Color c1 = new Color(0.9,0.6, 0.75);
+        Color c2 = new Color(0.7,0.1, 0.25);
+        assertTrue(new Color(0.2,0.5, 0.5).equals(c1.subtract(c2)));
+    }
+
+
+    @Test
+    @DisplayName("24. Multiplying Colors by a Scalar (17)")
+    void testScalarMultColor(){
+        Color c = new Color(0.2,0.3,0.4);
+        c.multiply(2);
+        assertTrue(new Color(0.4,0.6,0.8).equals(c));
+    }
+
+
+    @Test
+    @DisplayName("25. Multiplying Colors by Hadamard/Schur Porduct (17)")
+    void testHadamardColor(){
+        Color c1 = new Color(1,0.2, 0.4);
+        Color c2 = new Color(0.9,1, 0.1);
+        assertTrue(new Color(0.9,0.2, 0.04).equals(c1.hadamard(c2)));
+    }
 }

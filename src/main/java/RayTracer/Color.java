@@ -67,19 +67,9 @@ public class Color {
         this.blue = newBlue;
     }
 
-    public double dot(Color t){
-        return (this.getRed()*t.getRed() + this.getGreen() * t.getGreen() + this.getBlue() * t.getBlue());
+    public Color hadamard(Color t){
+        return (new Color (this.getRed()*t.getRed() , this.getGreen() * t.getGreen() , this.getBlue() * t.getBlue()));
     }
-
-    public Color cross(Color t){
-
-        double newRed = (this.green *t.blue) - (this.blue * t.green);
-        double newGreen = (this.blue*t.red) - (this.red*t.blue);
-        double newBlue = (this.red*t.green) - (this.green *t.red);
-
-        return new Color(newRed, newGreen, newBlue);
-    }
-
 
 
     //Overridden Methods
