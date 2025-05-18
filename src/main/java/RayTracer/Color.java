@@ -71,6 +71,12 @@ public class Color {
         return (new Color (this.getRed()*t.getRed() , this.getGreen() * t.getGreen() , this.getBlue() * t.getBlue()));
     }
 
+    public void replace(Color c){
+        this.red = c.red;
+        this.green = c.green;
+        this.blue = c.blue;
+    }
+
 
     //Overridden Methods
     @Override
