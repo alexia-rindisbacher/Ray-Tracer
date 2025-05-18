@@ -264,4 +264,22 @@ public class Tester {
         Color c2 = new Color(0.9,1, 0.1);
         assertTrue(new Color(0.9,0.2, 0.04).equals(c1.hadamard(c2)));
     }
+
+    @Test
+    @DisplayName("26. Creating a new canvas (19)")
+    void testBlankCanvas(){
+        //Fill this in
+    }
+
+    @Test
+    @DisplayName("27. Write a pixel to a canvas (19)")
+    void testWritePixel(){
+        //Fill this in
+    }
+
+    @Test
+    @DisplayName("28. Get a pixel from the canvas (19)")
+    void testGetPixel(){
+        //Fill this in
+    }
 }
