@@ -268,18 +268,24 @@ public class Tester {
     @Test
     @DisplayName("26. Creating a new canvas (19)")
     void testBlankCanvas(){
-        //Fill this in
+        Canvas c = new Canvas(5,4);
+        for (int i = 0 ; i < c.getHeight() ; i++ ){
+            for ( int j = 0 ; j < c.getWidth() ; j++){
+                assertEquals(new Color(0,0,0), c.getPixel(j,i));
+            }
+        }
     }
 
     @Test
-    @DisplayName("27. Write a pixel to a canvas (19)")
-    void testWritePixel(){
-        //Fill this in
+    @DisplayName("27. Write a pixel to a canvas & Test getPixel at the same time (19)")
+    void testWriteGetPixel(){
+        Canvas c = new Canvas(5,4);
+        c.writePixel(4,3, new Color(1,1,1));
+        //System.out.println(c);
+        assertEquals(new Color(1,1,1), c.getPixel(4,3));
+
     }
 
-    @Test
-    @DisplayName("28. Get a pixel from the canvas (19)")
-    void testGetPixel(){
-        //Fill this in
-    }
+
+
 }
