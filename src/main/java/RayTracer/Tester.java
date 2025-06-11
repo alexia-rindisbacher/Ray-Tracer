@@ -287,5 +287,45 @@ public class Tester {
     }
 
 
+    @Test
+    @DisplayName("28. canvasToPPM(), Constructs a PPM data using pixel data (20)")
+    void testcanvasToPPM(){
+        Canvas c = new Canvas(5,3);
+        Color c1 = new Color(1.5, 0, 0 );
+        Color c2 = new Color(0,0.5,0);
+        Color c3 = new Color(-0.5,0,1);
 
+        c.writePixel(0,0,c1);
+        c.writePixel(2,1,c2);
+        c.writePixel(4,2,c3);
+        String n = c.canvasToPPM();
+
+        assertEquals("P3\n5 3\n225\n225 0 0 0 0 0 0 0 0 0 0 0 0 0 0 \n0 0 0 0 0 0 0 128 0 0 0 0 0 0 0 \n0 0 0 0 0 0 0 0 0 0 0 0 0 0 255 \n", n);
+    }
+
+    @Test
+    @DisplayName("29. canvasToPPM(), Splits long lines in PPM File (22)")
+    void testLongLinesInPPM(){
+        Canvas c = new Canvas(10, 2, new Color(1,0.8, 0.6));
+        String s = c.canvasToPPM();
+        assertEquals("P3\n10 2\n225\n255 204 153 255 204 153 255 204 153 255 204 153 255 204 153 255 204 \n153 255 204 153 255 204 153 255 204 153 255 204 153 \n255 204 153 255 204 153 255 204 153 255 204 153 255 204 153 255 204 \n153 255 204 153 255 204 153 255 204 153 255 204 153 \n", s );
+    }
+
+    @Test
+    @DisplayName("30. canvasToPPM(), PPM files are terminated by a newline character (22)")
+    void testEndNewLine(){
+        Canvas c = new Canvas(5,3);
+        String s = c.canvasToPPM();
+        String n = "" + s.charAt(s.length()-1);
+        assertEquals("\n", n);
+    }
+
+    @Test
+    @DisplayName("31. PPM file")
+    void testPPMFileCreation(){
+        Canvas c = new Canvas(10, 2, new Color(1,0.8, 0.6));
+        String s = c.canvasToPPM();
+
+        //c.stringToPPM("06102025-testfile-3");
+    }
 }

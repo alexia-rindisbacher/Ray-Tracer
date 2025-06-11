@@ -7,10 +7,10 @@ public class Color {
     private final static double EPSILON = 0.0001;
 
     //Constructor: Initalizes a new color with values.
-    public Color(double red, double green, double z){
+    public Color(double red, double green, double blue){
         this.red = red;
         this.green = green;
-        this.blue = z;
+        this.blue = blue;
     }
 
     //Get methods
