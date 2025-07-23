@@ -361,4 +361,39 @@ public class Tester {
         assertEquals(13.5, m.get(3,0));
         assertEquals(15.5, m.get(3,2));
     }
+
+    @Test
+    @DisplayName("33. 2x2 Matrix Creation")
+    void matrix2x2(){
+        Matrix m = new Matrix(2,2);
+        m.set(0,0,-3);
+        m.set(0,1, 5);
+        m.set(1,0, 1);
+        m.set(1,1,-2);
+
+        assertEquals(-3, m.get(0,0));
+        assertEquals(5, m.get(0,1));
+        assertEquals(1, m.get(1,0));
+        assertEquals(-2, m.get(1,1));
+    }
+
+    @Test
+    @DisplayName("34. 3x3 Matrix Creation")
+    void matrix3x3(){
+        Matrix m = new Matrix(3,3);
+        m.set(0,0,-3);
+        m.set(0,1, 5);
+        m.set(1,0, 1);
+        m.set(1,1,-2);
+
+        m.set(2,0, 0);
+        m.set(2,1,1);
+        m.set(2,2, 1);
+        m.set(0,2,0);
+        m.set(1,2,-7);
+
+        assertEquals(-3, m.get(0,0));
+        assertEquals(1, m.get(2,2));
+        assertEquals(-2, m.get(1,1));
+    }
 }
