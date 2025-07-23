@@ -328,4 +328,37 @@ public class Tester {
 
         //c.stringToPPM("06102025-testfile-3");
     }
+
+    @Test
+    @DisplayName("32. Matrix Creation (26)")
+    void testMatrixCreator(){
+        Matrix m = new Matrix(4,4);
+        m.set(0,0,1);
+        m.set(0,1, 2);
+        m.set(0,2, 3);
+        m.set(0,3, 4);
+
+        m.set(1,0, 5.5F);
+        m.set(1,1, 6.5F);
+        m.set(1,2, 7.5F);
+        m.set(1,3, 8.5F);
+
+        m.set(2,0, 9);
+        m.set(2,1, 10);
+        m.set(2,2, 11);
+        m.set(2,3, 12);
+
+        m.set(3,0, 13.5F);
+        m.set(3,1, 14.5F);
+        m.set(3,2, 15.5F);
+        m.set(3,3, 16.5F);
+
+        assertEquals(1, m.get(0,0));
+        assertEquals(5.5, m.get(1,0));
+        assertEquals(4, m.get(0,3));
+        assertEquals(7.5, m.get(1,2));
+        assertEquals(11, m.get(2,2));
+        assertEquals(13.5, m.get(3,0));
+        assertEquals(15.5, m.get(3,2));
+    }
 }

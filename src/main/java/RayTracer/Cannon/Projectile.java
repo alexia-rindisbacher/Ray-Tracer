@@ -10,4 +10,6 @@ public class Projectile {
         this.position = p;
         this.velocity = v;
     }
+
+
 }
