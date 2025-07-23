@@ -396,4 +396,52 @@ public class Tester {
         assertEquals(1, m.get(2,2));
         assertEquals(-2, m.get(1,1));
     }
+
+    @Test
+    @DisplayName("35. Identical Matricies (27)")
+    void testEqualMatricies(){
+        Matrix m = new Matrix(4,4);
+        Matrix n = new Matrix(4,4);
+
+        //Set m:
+        int y = 1;
+        for (int r = 0 ; r < 4 ; r++){
+            for (int c = 0 ; c < 4 ; c++){
+                m.set(r,c,y);
+                n.set(r,c,y);
+                y++;
+            }
+        }
+
+        boolean worked = m.equals(n);
+        assertTrue(worked);
+    }
+
+    @Test
+    @DisplayName("36. Unequal Matricies (27)")
+    void testUnequalMatricies(){
+        Matrix m = new Matrix(4,4);
+        Matrix n = new Matrix(4,4);
+
+        //Set m:
+        int y = 1;
+        for (int r = 0 ; r < 4 ; r++){
+            for (int c = 0 ; c < 4 ; c++){
+                m.set(r,c,y);
+                y++;
+            }
+        }
+
+        int l = 2;
+        for (int r = 0 ; r < 4 ; r++){
+            for (int c = 0 ; c < 4 ; c++){
+                n.set(r,c,l);
+                l++;
+            }
+        }
+
+        boolean worked = m.equals(n);
+        assertFalse(worked);
+    }
+
 }
