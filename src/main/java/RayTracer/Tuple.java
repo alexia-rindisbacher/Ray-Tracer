@@ -6,6 +6,7 @@ public class Tuple {
     private double y;
     private double z;
     private double w;
+
     private final static double EPSILON = 0.0001;
 
     //Constructor: Intializes a new tuple with coordinates. Checks that w is 0 or 1.
@@ -34,6 +35,8 @@ public class Tuple {
     public double getX(){return this.x;}
     public double getY(){return this.y;}
     public double getZ(){return this.z;}
+    public double getW(){return this.w;}
+
 
     public void setX(double x){this.x = x;}
     public void setY(double y){this.y = y;}

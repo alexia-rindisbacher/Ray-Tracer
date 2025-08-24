@@ -444,4 +444,113 @@ public class Tester {
         assertFalse(worked);
     }
 
+    @Test
+    @DisplayName("37. Multiplying two matricies (28)")
+    void multiplyMatrix(){
+        Matrix m = new Matrix(4,4);
+        m.set(0,0,1);
+        m.set(0,1, 2);
+        m.set(0,2,3);
+        m.set(0,3,4);
+
+        m.set(1,0,5);
+        m.set(1,1, 6);
+        m.set(1,2,7);
+        m.set(1,3,8);
+
+        m.set(2,0,9);
+        m.set(2,1, 8);
+        m.set(2,2,7);
+        m.set(2,3,6);
+
+        m.set(3,0,5);
+        m.set(3,1, 4);
+        m.set(3,2,3);
+        m.set(3,3,2);
+
+        Matrix n = new Matrix(4,4);
+        n.set(0,0,-2);
+        n.set(0,1, 1);
+        n.set(0,2,2);
+        n.set(0,3,3);
+
+        n.set(1,0,3);
+        n.set(1,1, 2);
+        n.set(1,2,1);
+        n.set(1,3,-1);
+
+        n.set(2,0,4);
+        n.set(2,1, 3);
+        n.set(2,2,6);
+        n.set(2,3,5);
+
+        n.set(3,0,1);
+        n.set(3,1, 2);
+        n.set(3,2,7);
+        n.set(3,3,8);
+
+        Matrix l = m.multiply(n);
+
+        Matrix correctResult = new Matrix(4,4);
+        correctResult.set(0,0,20);
+        correctResult.set(0,1, 22);
+        correctResult.set(0,2,50);
+        correctResult.set(0,3,48);
+
+        correctResult.set(1,0,44);
+        correctResult.set(1,1, 54);
+        correctResult.set(1,2,114);
+        correctResult.set(1,3,108);
+
+        correctResult.set(2,0,40);
+        correctResult.set(2,1, 58);
+        correctResult.set(2,2,110);
+        correctResult.set(2,3,102);
+
+        correctResult.set(3,0,16);
+        correctResult.set(3,1, 26);
+        correctResult.set(3,2,46);
+        correctResult.set(3,3,42);
+
+        boolean worked = correctResult.equals(l);
+        assertTrue(worked);
+    }
+
+    @Test
+    @DisplayName("38. Multiplying Matrix and Tuple (30)")
+    void multiplyMatrixTuple(){
+        Matrix m = new Matrix(4,4);
+        m.set(0,0,1);
+        m.set(0,1, 2);
+        m.set(0,2,3);
+        m.set(0,3,4);
+
+        m.set(1,0,2);
+        m.set(1,1, 4);
+        m.set(1,2,4);
+        m.set(1,3,2);
+
+        m.set(2,0,8);
+        m.set(2,1, 6);
+        m.set(2,2,4);
+        m.set(2,3,1);
+
+        m.set(3,0,0);
+        m.set(3,1, 0);
+        m.set(3,2,0);
+        m.set(3,3,1);
+
+        Tuple b = new Tuple(1,2,3,1);
+
+        Matrix result = m.multiply(b);
+        Matrix correctResult = new Matrix(4,1);
+        correctResult.set(0,0, 18);
+        correctResult.set(1,0, 24);
+        correctResult.set(2,0, 33);
+        correctResult.set(3,0, 1);
+
+        boolean worked = correctResult.equals(result);
+        assertTrue(worked);
+
+    }
 }

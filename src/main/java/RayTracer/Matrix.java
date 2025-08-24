@@ -8,22 +8,6 @@ public class Matrix {
     private int rowSize;
     private int columnSize;
 
-    public static void main(String args[]){
-        Matrix m = new Matrix(2,2);
-        m.set(0,0,1);
-        m.set(0,1, 2);
-        m.set(1,0, 3);
-        m.set(1,1,4);
-
-        Matrix n = new Matrix(2,2);
-        n.set(0,0,1);
-        n.set(0,1, 2);
-        n.set(1,0, 3);
-        n.set(1,1,4);
-
-        Matrix l = m.multiply(n);
-    }
-
     public Matrix(int rowSize, int columnSize){
         this.matrix = new Float[rowSize][columnSize];
         this.rowSize = rowSize;
@@ -53,7 +37,7 @@ public class Matrix {
         for (int row = 0 ; row < result.rowSize ; row++){
             float[] currentRow = selectRow(row);
             for (int col = 0 ; col < result.columnSize; col++){
-                float[] currentCol = selectCol(col);
+                float[] currentCol = other.selectCol(col);
                 result.set(row, col, multiplyTuple(currentCol, currentRow));
             }
         }
@@ -62,6 +46,32 @@ public class Matrix {
         return result;
     }
 
+    public Matrix multiply(Tuple other){
+        //Step 1: Make the Tuple into an array instead
+        float[] tuple = new float[4];
+        tuple[0] = (float) other.getX();
+        tuple[1] = (float) other.getY();
+        tuple[2] = (float) other.getZ();
+        tuple[3] = (float) other.getW();
+
+
+        //Step 2: Create resulting matrix:
+        Matrix result = new Matrix(this.rowSize, 1);
+
+        //Step 3: Determine each result and enter it
+        //This is the same as above but instead of selecting each column like we did above,
+        //we just have the tuple be the column every time.
+        float n = 0;
+
+        for (int row = 0 ; row < result.rowSize ; row++){
+            float[] currentRow = selectRow(row);
+            result.set(row, 0, multiplyTuple(tuple, currentRow));
+        }
+        //Step 4: Return the result
+        return result;
+    }
+
+    //HELPER METHODS FOR multiply(matrix)
     private float[] selectRow(int x){
         float[] row = new float[this.rowSize];
         for (int i = 0 ; i < this.rowSize ; i ++){
