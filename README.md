@@ -1,3 +1,3 @@
 The Ray Tracer Challenge by Jamis Buck \
 Implemented in Java by Alexia Rindisbacher \
-Progress: Chapter Three: "Matrices"
+Progress: Chapter Three: "Matrices" 
