@@ -553,4 +553,28 @@ public class Tester {
         assertTrue(worked);
 
     }
+
+    @Test
+    @DisplayName("39. Identity Matrix Multiplication (32)")
+    void identityMultiplication(){
+        float[][] n = {{0,1,2,4},{1,2,3,8},{2,4,8,16},{4,8,16,32}};
+
+        Matrix m = new Matrix(n);
+        Matrix result = m.multiplyIdentity();
+        boolean worked = result.equals(m);
+        assertTrue(worked);
+    }
+
+    @Test
+    @DisplayName("40. Identity Tuple Multiplication (32)")
+    void identityTupleMultiplication(){
+        //Book says to use 4, used 1 instead because tuple class requires w to be 0 or 1.
+        Tuple n = new Tuple(1,2,3,1);
+        Matrix result = Matrix.multiplyIdentityTuple(n);
+        float[][] x = {{1},{2},{3},{1}};
+        Matrix correctResult = new Matrix(x);
+        boolean worked = result.equals(correctResult);
+        assertTrue(worked);
+    }
+
 }

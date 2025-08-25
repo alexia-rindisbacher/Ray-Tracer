@@ -4,14 +4,20 @@ import java.util.LinkedList;
 
 public class Matrix {
     private final static double EPSILON = 0.0001;
-    private Float[][] matrix;
+    private float[][] matrix;
     private int rowSize;
     private int columnSize;
 
     public Matrix(int rowSize, int columnSize){
-        this.matrix = new Float[rowSize][columnSize];
+        this.matrix = new float[rowSize][columnSize];
         this.rowSize = rowSize;
         this.columnSize = columnSize;
+    }
+
+    public Matrix(float[][] n){
+        this.matrix = n;
+        this.rowSize = n.length;
+        this.columnSize = n[0].length;
     }
 
     public void set(int row, int column, float item){
@@ -70,6 +76,23 @@ public class Matrix {
         //Step 4: Return the result
         return result;
     }
+
+    public Matrix multiplyIdentity(){
+        Matrix identity = new Matrix(4,4);
+        float[][] i =  {{1,0,0,0},{0,1,0,0},{0,0,1,0},{0,0,0,1}};
+        identity.matrix = i;
+
+        return this.multiply(identity);
+    }
+
+    public static Matrix multiplyIdentityTuple(Tuple t){
+        Matrix identity = new Matrix(4,4);
+        float[][] i =  {{1,0,0,0},{0,1,0,0},{0,0,1,0},{0,0,0,1}};
+        identity.matrix = i;
+
+        return identity.multiply(t);
+    }
+
 
     //HELPER METHODS FOR multiply(matrix)
     private float[] selectRow(int x){
